@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-  background-image: url("/src/assets/star-wars.jpg");
-  background-color: black;
+  background-image: url("/assets/img/background.jpeg");
+/*   background-color: black; */
   color: rgb(161, 143, 71);
 }
