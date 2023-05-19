@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from "src/app/environments/environments";
+
+import { environment } from 'src/app/environments/environments';
 import { User } from 'src/app/interfaces/user';
 
 @Injectable({ providedIn: 'root' })
@@ -40,4 +41,9 @@ export class AccountService {
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
     }
+
+    //sends a POST request to the register route on the backend
+    register(user: User) {
+      return this.http.post(`${environment.apiUrl}/register`, user);
+  }
 }

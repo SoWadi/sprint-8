@@ -90,9 +90,9 @@ Service_pagination(){
       this.nextPage = data.next;
       this.pagination = data.next;
       this.isLoading = false
-      console.log(this.pagination);
+/*       console.log(this.pagination);
       console.log("data - ", data);
-      console.log("data.next - ", data.next);
+      console.log("data.next - ", data.next); */
 
     });
 }
@@ -106,8 +106,9 @@ loadMoreData() {
     this.varLoadMore = this.varLoadMore.concat(newData);
     this.page++;
     this.isLoading = false;
-    console.log("this.varLoadMore   -  ", this.varLoadMore)}) // devuelve lárray
-    console.log("ABAJOOOOO");
+    //console.log("this.varLoadMore   -  ", this.varLoadMore)
+  }) // devuelve lárray
+    //console.log("ABAJOOOOO");
 }
 
 
