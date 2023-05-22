@@ -5,53 +5,48 @@
     <!-------------------- TITRE ---------------------->
     <h2 class="text-center">{{ detailedShip.name }}</h2>
 
-
-
-    <!-------------------- TITOL ---------------------->
+    <!-------------------- IMG ---------------------->
     <div class="img-container d-flex justify-content-center">
       <!-- <img src="/src/assets/star-wars.jpg" alt="" class="">  --><!-- TODO: INSERER IMAGE -->
-<!--       <img src="../assets/star-wars.jpg" alt="test.img"> -->
-<!--       <img [src]="img" class="card-img-top" [alt]="detailedShip.name"> -->
-      <img *ngIf="imageLoaded; else alternativeImage"
-      [src]="img"
-      (load)="imageLoaded = true"
-      (error)="imageLoaded = false">
+      <!--       <img src="../assets/star-wars.jpg" alt="test.img"> -->
+      <!--       <img [src]="img" class="card-img-top" [alt]="detailedShip.name"> -->
+      <img *ngIf="imageLoaded; else alternativeImage" [src]="img" (load)="imageLoaded = true"
+        (error)="imageLoaded = false">
 
-<ng-template #alternativeImage>
-  <img src="/assets/Image_not_available.png">
-</ng-template>
-
-
+      <ng-template #alternativeImage>
+        <img src="/assets/Image_not_available.png">
+      </ng-template>
 
     </div>
 
-
-    <div class="text-center m-3 p-3 border border-warning">
-      <h5 class="card-subtitle mb-2">Model: {{ detailedShip.model }}</h5>
-      <h5 class="card-subtitle mb-2">Starship Class: {{ detailedShip.starship_class }}</h5>
-      <h5 class="card-subtitle mb-2">Manufacturer: {{ detailedShip.manufacturer}}</h5>
-      <h5 class="card-subtitle mb-2">Cost: {{ detailedShip.cost_in_credits }} CREDITS</h5>
-    </div>
-
-    <div class="row">
-      <div class="col text-center m-3 p-3 border border-warning">
-
-        <h6 class="card-subtitle mb-2">Crew: {{detailedShip.crew}} </h6>
-        <h6 class="card-subtitle mb-2">Passenger Capacity: {{detailedShip.passengers}}</h6>
-        <h6 class="card-subtitle mb-2">Cargo Capacity: {{detailedShip.cargo_capacity}} TONS</h6>
-        <h6 class="card-subtitle mb-2">Consumables: {{detailedShip.consumables}}</h6>
+    <div class="containerInfo">
+      <div class="text-center m-3 p-3 border border-warning bloque">
+        <h5 class="card-subtitle mb-2"><strong> Model:</strong> {{ detailedShip.model }}</h5>
+        <h5 class="card-subtitle mb-2"><strong> Starship Class:</strong> {{ detailedShip.starship_class }}</h5>
+        <h5 class="card-subtitle mb-2"><strong> Manufacturer:</strong> {{ detailedShip.manufacturer}}</h5>
+        <h5 class="card-subtitle mb-2"><strong> Cost:</strong> {{ detailedShip.cost_in_credits }} CREDITS</h5>
       </div>
 
-      <div class="col text-center m-3 p-3 border border-warning">
-        <h6 class="card-subtitle mb-2">Length: {{detailedShip.length}} Meters</h6>
-        <h6 class="card-subtitle mb-2">Maximum atmosphering speed: {{detailedShip.max_atmosphering_speed}} KM/H</h6>
-        <h6 class="card-subtitle mb-2">Hyperdrive rating: {{detailedShip.hyperdrive_rating}}</h6>
-        <h6 class="card-subtitle mb-2">Maximum speed in realspace: {{detailedShip.MGLT}} MGLT</h6>
-      </div>
-    </div>
+      <div class="row m-1">
+        <div class="col text-center border border-warning m-3 p-5 bloque">
 
-    <div class="col text-center m-3 p-5 border border-warning">
-      <h6 class="card-subtitle mb-2">Pilots: {{detailedShip.pilots}} -- pilots</h6>
+          <h6 class="card-subtitle mb-2"><strong> Crew:</strong> {{detailedShip.crew}} </h6>
+          <h6 class="card-subtitle mb-2"><strong> Passenger Capacity:</strong> {{detailedShip.passengers}}</h6>
+          <h6 class="card-subtitle mb-2"><strong> Cargo Capacity:</strong> {{detailedShip.cargo_capacity}} TONS</h6>
+          <h6 class="card-subtitle mb-2"><strong> Consumables:</strong> {{detailedShip.consumables}}</h6>
+        </div>
+
+        <div class="col text-center m-3 p-5 border border-warning bloque">
+          <h6 class="card-subtitle mb-2"><strong> Length:</strong> {{detailedShip.length}} Meters</h6>
+          <h6 class="card-subtitle mb-2"><strong> Maximum atmosphering speed:</strong> {{detailedShip.max_atmosphering_speed}} KM/H</h6>
+          <h6 class="card-subtitle mb-2"><strong> Hyperdrive rating:</strong> {{detailedShip.hyperdrive_rating}}</h6>
+          <h6 class="card-subtitle mb-2"><strong> Maximum speed in realspace:</strong> {{detailedShip.MGLT}} MGLT</h6>
+        </div>
+      </div>
+
+      <div class="col text-center m-3 p-3 border border-warning w-auto bloque">
+        <h6 class="card-subtitle mb-2">Pilots: {{detailedShip.pilots}} -- pilots</h6>
+      </div>
 
     </div>
   </div>
@@ -68,37 +63,3 @@
 </div>
 
 <h4 *ngIf='!detailedShip' class="center">Aucun ship à afficher !</h4>
-<!--               EXAMPLE SIMON DIENY - Pokemons -->
-<!-- <div class="card-content">
-                    <table class="bordered striped">
-                        <tbody>
-                            <tr>
-                                <td>Nom</td>
-                                <td><strong>{{ detailedShip.MGLT }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Points de vie</td>
-                                <td><strong>{{ detailedShip.cargo_capacity }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Dégâts</td>
-                                <td><strong>{{ detailedShip.consumables }}</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Types</td>
-<!--                                 <td>
-                                    <span *ngFor="let type of detailedShip.types" class="{{ type | pokemonTypeColor }}">{{
-                                        type }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Date de création</td>
-                                <td><em>{{ detailedShip.cost_in_credits| date:"dd/MM/yyyy" }}</em></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
-
-<!--                 <div class="card-action">
-                    <a (click)="goto()">Retour</a>
-                </div> -->
