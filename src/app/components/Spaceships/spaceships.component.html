@@ -1,13 +1,13 @@
-<div class="nav-bar text-center">
+<!-- <div class="nav-bar text-center" >
+ -->
 
-</div>
 
-<div class="container text-center" #scrollingArea>
+<div class="container text-center"#scrollingArea >
 
   <div class="mt-5" *ngIf="!user">You need to be logged in to access</div>
 
-  <div *ngIf="user">
-    <div *ngFor=" let ship of listaStarships, let i = index" class="backGroundCard m-5 p-2">
+  <div *ngIf="user" class="scroll-container" (ngxInfiniteScroll)="onScroll2()">
+    <div *ngFor=" let ship of listaStarships, let i = index" class="backGroundCard m-5 p-2 scroll-item">
 
       <!--   <h1>{{ getSpaceShips | json }}</h1> -->
 
@@ -29,7 +29,8 @@
 
     </div>
   </div>
-  <div class="loading" *ngIf="isLoading">Chargement en cours...</div>
+  <div class="loading" *ngIf="isLoading&&user">Loading...</div>
 
     <!-- <button (click)="Service_pagination()">Test pagination</button> -->
   </div>
+<!-- </div> -->

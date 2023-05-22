@@ -56,30 +56,24 @@ export class SpaceshipsComponent implements OnInit {
 
 //Utilisez la directive @HostListener pour écouter l'événement de défilement dans le composant. Lorsque l'utilisateur fait défiler jusqu'à la fin de la liste, appelez la méthode loadMoreData().
   @HostListener('window:scroll', ['$event'])
-onScroll(event: any) {
-  const scrollingArea = this.scrollingArea.nativeElement;
-  const offsetHeight = scrollingArea.offsetHeight;
-  const scrollTop = scrollingArea.scrollTop;
-  const scrollHeight = scrollingArea.scrollHeight;
+onScroll(event: Event) {
+  const windowHeight = window.innerHeight;
+  //const scrollY = window.scrollY //|| window.pageYOffset;
+  const scrollY = document.documentElement.scrollHeight || document.body.scrollTop;
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const documentHeight = document.documentElement.scrollHeight;
 
-  if (offsetHeight + scrollTop >= scrollHeight ) { //&& !this.loadingShips && this.nextPage !== null
-/*     this.loadingShips=true;
-    this.pageNumber++; */
+  if (windowHeight + scrollTop >= scrollY && !this.isLoading && this.page <5 ) { //&& !this.isLoading && this.nextPage !== null
+
     this.isLoading=true;
     this.page++;
     this.Service_pagination();
     this.loadMoreData();
+    console.log("this.nextPage  -  ", this.nextPage);
+    console.log("this.page  -  ", this.page);
     console.log("SCROLLING DOOOOOOWN");
   }
-/*   const windowHeight = window.innerHeight;
-  const scrollY = window.scrollY || window.pageYOffset;
 
-  const documentHeight = document.documentElement.scrollHeight;
-
-  if (windowHeight + scrollY >= documentHeight) {
-    this.loadMoreData();
-    console.log("SCROLLING DOOOOOOWN");
-  } */
 }
 
 Service_pagination(){
