@@ -1,12 +1,12 @@
-<header class="container-fluid d-flex align-items-center">
+<header class="container-fluid  align-items-center">
 
-  <div class="d-flex">
+<!--   <div class="d-flex"> -->
   <img src="../assets/starwars_logo.png" class="starwarsLogo img-fluid w-100 justify-content-center" alt="starwars">
-  <nav class="navbar navbar-expand navbar-dark px-3 flex-shrink-1" *ngIf="!user">
+  <nav class="navbar navbar-expand navbar-dark px-3 flex-shrink-1 justify-content-end ms-auto" *ngIf="!user">
     <button type="button" routerLink="/account/login" class="btn border-dark m-2">LOGIN</button>
     <button type="button" routerLink="/account/register" class="btn border-dark m-2">SIGN UP</button>
   </nav>
-</div>
+<!-- </div> -->
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark px-3" *ngIf="user">
   <div class="navbar-nav">
