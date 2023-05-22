@@ -4,4 +4,5 @@ body{
 /*   background-color: black; */
   color: rgb(161, 143, 71);
   margin: auto;
+  overflow-x: hidden;
 }
