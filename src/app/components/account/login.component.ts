@@ -27,18 +27,20 @@ export class LoginComponent implements OnInit {
     ) {
         // redirect to home if already logged in
         if (this.accountService.userValue) {
-            this.router.navigate(['/starships']);
+            this.router.navigate(['/']);
         }
     }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            username: ['', Validators.required],
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
 
         // show success message after registration
         if (this.route.snapshot.queryParams.registered) {
+          console.log("this.route.snapshot.queryParams.registered --  ", this.route.snapshot.queryParams.registered);
+
           this.success = 'Registration successful';
       }
     }
@@ -52,17 +54,19 @@ export class LoginComponent implements OnInit {
         // reset alert on submit
         this.error = '';
         this.success = '';
-
+        console.log("this.form.invalid  -- ", this.form.invalid);
+        console.log("this.success  -- ", this.success);
         // stop here if form is invalid
         if (this.form.invalid) {
             return;
         }
 
         this.loading = true;
-        this.accountService.login(this.f.username.value, this.f.password.value)
+        this.accountService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {
+                  console.log("this.f.email.value  -  ", this.f.email.value);
                     // get return url from query parameters or default to home page
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     console.log("returnUrl  - ", returnUrl);

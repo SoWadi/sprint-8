@@ -3,7 +3,9 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
 
-let users = [{ id: 1, firstName: 'Jason', lastName: 'Watmore', username: 'test', password: 'test' }];
+// array in local storage for registered users
+const usersKey = 'angular-tutorial-users';
+let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -14,8 +16,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function handleRoute() {
             switch (true) {
-                case url.endsWith('/users/authenticate') && method === 'POST':
+                case url.endsWith('/authenticate') && method === 'POST':
                     return authenticate();
+                case url.endsWith('/register') && method === 'POST':
+                    return register();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -25,13 +29,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // route functions
 
         function authenticate() {
-            const { username, password } = body;
-            const user = users.find(x => x.username === username && x.password === password);
+            const { email, password } = body;
+            const user = users.find(x => x.email === email && x.password === password);
             if (!user) return error('Username or password is incorrect');
             return ok({
                 ...basicDetails(user),
                 token: 'fake-jwt-token'
             })
+        }
+
+        function register() {
+            const user = body
+
+            if (users.find(x => x.email === user.email)) {
+                return error('Username "' + user.email + '" is already taken')
+            }
+
+//calculates the next user.id by adding 1 to the current highest user id or defaults to 1 for the first user.
+            user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
+            users.push(user);
+            localStorage.setItem(usersKey, JSON.stringify(users));
+            return ok();
         }
 
         // helper functions
@@ -47,8 +65,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function basicDetails(user: any) {
-            const { id, username, firstName, lastName } = user;
-            return { id, username, firstName, lastName };
+            const { id, email, firstName, lastName } = user;
+            return { id, email, firstName, lastName };
         }
     }
 }
@@ -58,4 +76,4 @@ export const fakeBackendProvider = {
     provide: HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
     multi: true
-}
+};

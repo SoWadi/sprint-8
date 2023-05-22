@@ -25,8 +25,8 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    login(email: string, password: string) {
+        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { email, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -44,6 +44,7 @@ export class AccountService {
 
     //sends a POST request to the register route on the backend
     register(user: User) {
+      console.log("user  -  ", user);
       return this.http.post(`${environment.apiUrl}/register`, user);
   }
 }

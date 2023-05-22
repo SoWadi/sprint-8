@@ -32,7 +32,7 @@ import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './compone
     LoginComponent,
     RegisterComponent,
   ],
-  providers: [starWarsService, AccountService,
+  providers: [starWarsService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

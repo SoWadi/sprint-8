@@ -3,12 +3,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-
+;
 import { AccountService } from '../services/account.service';
 
-@Component({ templateUrl: 'register.component.html',
-            styleUrls: ['./register.component.css']
+@Component({
+  templateUrl: './register.component.html',
+  styleUrls: ['./login.component.css'],
 })
+
+
 
 export class RegisterComponent implements OnInit {
     form!: FormGroup;
@@ -33,7 +36,7 @@ export class RegisterComponent implements OnInit {
         this.form = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
-            username: ['', Validators.required],
+            email: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
@@ -58,6 +61,7 @@ export class RegisterComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
+                  console.log("this.form.value  -  ", this.form.value);
                     this.router.navigate(['/account/login'], { queryParams: { registered: true }});
                 },
                 error: error => {
